@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Query 1</h2>
+<table border="1">
+    <th>Genre</th>
+    <th>Title</th>
+    <th>Duration</th>
+        {% for content in query_1 %}
+            <tr>
+            <td>{{ content.genre }} </td>
+            <td>{{ content.title }} </td>
+            <td>{{ content.duration }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+<h2>Query 2</h2>
+<table border="1">
+    <th>Title</th>
+    <th>Average Rank</th>
+        {% for content in query_2 %}
+            <tr>
+            <td>{{ content.title }} </td>
+            <td>{{ content.avg_rank }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+<h2>Query 3</h2>
+<table border="1">
+    <th>Title</th>
+        {% for content in query_3 %}
+            <tr>
+            <td>{{ content.title }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Query data from database</h1><br><br>
+<h2>Genre statistics</h2>
+<table border="1">
+    <th>Genre</th>
+    <th>max Gross Movie</th>
+    <th>max Gross</th>
+    <th>Year Count</th>
+    <th>max Length Movie</th>
+        {% for content in sql_a %}
+            <tr>
+            <td>{{ content.genre }} </td>
+            <td>{{ content.movieTitle }} </td>
+            <td>{{ content.max_gross }} </td>
+            <td>{{ content.number_of_movies }} </td>
+            <td>{{ content.max_length }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+<h2>Actors that played in more than inputted below number of movies</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="">Input number of movies</label>
+    <input type="number" name="num_input" min="0" step="1" oninput="validity.valid||(value='');" required>
+    <br>
+    <input type="submit">
+</form>
+{% if sql_b %}
+    <table border="1">
+    <th>Actor</th>
+    <th>Title</th>
+        {% for content in sql_b %}
+            <tr>
+            <td>{{ content.actor }} </td>
+            <td>{{ content.movieTitle }} </td>
+            </tr>
+        {% endfor %}
+    </table><br><br>
+{% endif %}
+<h2>Top 5 Movies by the amount of Children only actors in them</h2>
+<table border="1">
+    <th>Movie</th>
+    <th>"Children only actors"</th>
+        {% for content in sql_c %}
+            <tr>
+            <td>{{ content.movie }} </td>
+            <td>{{ content.num_actors }} </td>
+            </tr>
+        {% endfor %}
+</table><br><br>
+
+</body>

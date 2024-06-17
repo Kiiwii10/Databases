@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Rank a title</h2>
+<form method="POST" id="rank" name="rank">
+    {% csrf_token %}
+
+    <label for="hID">hID:</label>
+    <select id="hID" name="hID" required >
+                <option value="">select hID</option>
+                {% for content in hIDs %}
+                    <option value="{{ content.hID }}">{{ content.hID }}</option>
+                {% endfor %}
+    </select><br>
+
+    <label for="Title">Title:</label>
+    <select id="Title" name="Title" required >
+                <option value="">select Title</option>
+                {% for content in titles %}
+                    <option value="{{ content.title }}">{{ content.title }}</option>
+                {% endfor %}
+    </select><br>
+
+    <label for="Rating">Rating:</label>
+    <select id="Rating" name="Rating" required >
+                <option value="">select Rating</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+    </select><br>
+
+
+    <input type="submit" NAME="Submit">
+</form>
+
+<h2>Best Average</h2>
+
+<form method="POST" id="average" name="average">
+    {% csrf_token %}
+
+    <label for="Genre">Genre:</label>
+    <select id="Genre" name="Genre" required >
+                <option value="">select a genre</option>
+                {% for content in genre_scroll %}
+                    <option value="{{ content.genre }}">{{ content.genre }}</option>
+                {% endfor %}
+    </select><br>
+
+    <label for="min_ranks">min ranks:</label>
+    <input type="number" name="min_ranks" id="min_ranks" min="0" required><br>
+
+
+    <input type="submit" NAME="Submit">
+</form><br><br>
+{% if pop_shows %}
+    <table border="1">
+    <th>Genre</th>
+    <th>Average Rating</th>
+        {% for content in pop_shows %}
+            <tr>
+            <td>{{ content.title }} </td>
+            <td>{{ content.average }} </td>
+            </tr>
+        {% endfor %}
+    </table><br><br>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Order & Returns</h1>
+<br>
+<h2>Submit A Record Order</h2>
+<br>
+<form method="POST" id="order" name="order">
+    {% csrf_token %}
+    hID: <textarea name="hID_order" rows="1" cols="10"  required></textarea><br>
+    Title: <textarea name="title" rows="1" required></textarea><br>
+    <input type="submit" NAME="Submit">
+</form>
+<br>
+{{ order_error }}
+{{ placed }}
+<br>
+<h2>Submit A Record Return</h2>
+<br>
+<form method="POST" id="return" name="return">
+    {% csrf_token %}
+    hID: <textarea name="hID_return" rows="1" cols="10"  required></textarea><br>
+    Title: <textarea name="title" rows="1" required></textarea><br>
+    <input type="submit" NAME="Submit">
+</form>
+<br>
+{{ return_error }}
+{{ returned }}
+<br>
+<h2>Top 3 Returners</h2>
+<table border="1">
+    <th>hID</th>
+    <th>Number of Returns</th>
+        {% for content in most_returns %}
+            <tr>
+            <td>{{ content.hID }} </td>
+            <td>{{ content.num_returns }} </td>
+            </tr>
+        {% endfor %}
+</table>
+
+</body>
+</html>

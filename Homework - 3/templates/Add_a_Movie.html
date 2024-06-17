@@ -1,0 +1,32 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add data to database</h1><br><br>
+<form method="POST">
+    {% csrf_token %}
+    Movie Title: <textarea name="Movie_Title" rows="1" cols="50" maxlength="50" minlength="1" required></textarea><br>
+    Release Date: <input type="date" name="Release_Date" minlength="1" required><br>
+    <label for="Genre">Genre:</label>
+    <select id="Genre" name="Genre" required >
+                <option value="">select a genre</option>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Drama">Drama</option>
+    </select><br>
+    Rating: <select name="Rating"  required>
+                <option value="">select a rating</option>
+                <option value="R">R</option>
+                <option value="G">G</option>
+                <option value="PG">PG</option>
+                <option value="PG-13">PG-13</option>
+                <option value="Not Rated">Not Rated</option>
+            </select><br>
+    Gross: <input type="number" name="Gross" min="0" max="1000000000" required><br>
+    <input type="submit" NAME="Submit">
+</form>
+</body>
